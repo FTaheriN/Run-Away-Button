@@ -1,0 +1,103 @@
+<!Doctype>
+<html>
+<head>
+    <style>
+        body {
+            background: #1d1f20;
+            color: white;
+        }
+        
+        .container {
+            width: 100%;
+        }
+        
+        .container h1 {
+            text-align: center;
+        }
+        
+        #runaway-button {
+            border-radius: 3px;
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            padding-top: 8px;
+            padding-bottom: 9px;
+            cursor: pointer;
+            top: 130;
+            left: 30;
+            transition: 0.05s ease;
+            -webkit-transition: 0.05s ease;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="button-container"></div>
+<img src="img2.jpg"  id="runaway-button">
+</body>
+</html>
+<script>
+
+    var offset = 40;
+
+    document.addEventListener('mousemove' , function(e){
+        var runaway_button = document.getElementById('runaway-button');
+        var button_top = runaway_button.offsetTop;
+        var button_left = runaway_button.offsetLeft;
+
+        var button_width = 150;
+        var button_height = 50;
+        var mouseX = e.clientX;
+        var mouseY = e.clientY
+
+        if((((button_top - mouseY)  <= offset) && ((button_top - mouseY) >= 0)
+            &&((button_left - offset) < mouseX)
+            &&((button_left + button_width + offset) > mouseX)) || 
+            (((button_left - mouseX) <= offset) && ((button_left - mouseX) >= 0)
+            &&((button_top - offset < mouseY))
+            &&(button_top + button_height + offset > mouseY)) ||
+            (((mouseY - (button_top + button_height)) <= offset) && ((mouseY - (button_top + button_height)) >= 0)
+            &&((button_left - offset) < mouseX)
+            &&((button_left + button_width + offset) > mouseX)) ||
+            (((mouseX - (button_left + button_width)) <= offset) && ((mouseX - (button_left + button_width)) >= 0)
+            &&((button_top - offset < mouseY))
+            &&(button_top + button_height + offset > mouseY)))
+        {
+            mLeft = Math.random() * 600;
+		    mTop = Math.random() * 600;
+            runaway_button.style.left = mLeft;
+            runaway_button.style.top = mTop;
+        }
+    });
+
+    
+
+    document.addEventListener("click" , function clickFunction(e){
+        var el = document.getElementById('runaway-button');
+        btnTop = el.offsetTop;
+        btnLeft = el.offsetLeft;
+        clickTop = event.clientY;
+        clickLeft = event.clientX;
+        sum = Math.pow(Math.pow(btnTop - clickTop , 2) + Math.pow(btnLeft - clickLeft , 2) , 0.5);
+        if (sum <= 200)
+        {
+            //alert("CX " + clickLeft + " CY " + clickTop + " BX " + btnLeft + " BY " + btnTop + " sum " + sum);
+            myfunction();
+        }
+        
+    });
+
+    function myfunction()
+    {
+        //alert("clicked");
+        var winTop= (screen.height/ 2) -250;
+        var winLeft= (screen.width/ 2) -150;
+        var windowFeatures= "width=500,height=300,";
+        windowFeatures= windowFeatures+ "left=" + winLeft+ ",";
+        windowFeatures= windowFeatures+ "top=" + winTop;
+        newWindow= window.open("form.htm","myWindow",windowFeatures);
+    }
+
+
+</script>

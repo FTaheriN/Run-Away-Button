@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HTML Forms</h2>
+
+<form>
+  <label for="number">Number:</label><br>
+  <input type="text" id="number" name="number"><br>
+  <input type="button" onclick ="calculation()" value="Calculate">
+</form> 
+</body>
+</html>
+<script Language = 'JavaScript'>
+
+    function calculation()
+    {
+        var num1 = document.getElementById('number').value;
+        num = parseInt(num1)
+        var ans = factorial(num);
+        
+        alert("The factorial of " + num + " is: " + ans);
+        window.close()
+    }
+    function factorial(num) 
+    {
+        var result = num;
+        if (num === 0 || num === 1) 
+          return 1; 
+        while (num > 1) { 
+          num--;
+          result *= num;
+        }
+        return result;
+      }
+</script>
